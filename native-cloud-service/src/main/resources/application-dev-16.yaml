@@ -1,0 +1,8 @@
+k8s:
+  api:
+    config-file: admin-16.conf
+server:
+  port: 8080
+#开启swagger
+swagger:
+  enabled: true

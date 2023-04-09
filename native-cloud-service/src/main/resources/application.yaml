@@ -1,0 +1,67 @@
+server:
+  port: 8080
+spring:
+# springboot 2.4.x
+#  config:
+#    activate:
+#      on-profile: prod
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/api?serverTimezone=CST&useUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true #？后面参数表示时区，非常重要
+    username: root
+    password: 183017
+  redis:
+    host: 119.23.43.118
+    port: 6379
+    password: '@zZ183017'
+  servlet:
+    multipart:
+      max-file-size: 1GB
+      max-request-size: 1GB
+#  swagger3启动 http://localhost:8080/swagger-ui/index.html
+  mvc:
+    path match:
+      matching-strategy: ant_path_matcher
+
+  profiles:
+    active: prod
+swagger:
+  enabled: false
+
+#  cloud:
+#    gateway:
+#      routes:
+#        - id: harbor
+#          uri: http://localhost:8080/hello
+#          predicates:
+#            - Path=/api/v2.0/**
+
+#k8s配置
+k8s:
+  api:
+    config-file: admin-local.conf
+
+#harbor地址
+host:
+  harbor-server: ${HARBOR_HOST:192.168.200.131:30002}
+  docker-server: ${DOCKER_HOST:192.168.200.131:2375}
+#harbor配置
+harbor:
+  harbor-host: http://${host.harbor-server}
+  harbor-ip: ${host.harbor-server}
+
+docker:
+  # 在部署上线时使用
+#  host: unix:///var/run/docker.sock
+  host: tcp://${host.docker-server}
+  #push pull harbor
+  username: ${HARBOR_USERNAME:admin}
+  password: ${HARBOR_PASSWORD:Harbor12345}
+  registry-host: ${harbor.harbor-ip}
+
+jwt:
+  tokenHeader: Authorization #JWT存储的请求头，请求是这个就是token的key
+  secret: ukc8BDbRigUDaY6pZFfWus2jZWLPHO #JWT加解密使用的密钥
+  expiration: 86400000 #JWT有效时间（1000*60*60*24）一天
+  tokenHead: Bearer #JWT负载中拿到的开头，token字符串，tokenHead是字符串的头，也就是以它开头
+

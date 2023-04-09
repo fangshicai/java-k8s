@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fsc.mapper.SysUserMapper">
+    <resultMap id="BaseResultMap" type="com.fsc.model.SysUser">
+        <!--@mbg.generated-->
+        <!--@Table sys_user-->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="fullname" jdbcType="VARCHAR" property="fullname"/>
+        <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="status" jdbcType="TINYINT" property="status"/>
+        <result column="create_by" jdbcType="BIGINT" property="createBy"/>
+        <result column="modify_by" jdbcType="BIGINT" property="modifyBy"/>
+        <result column="created" jdbcType="TIMESTAMP" property="created"/>
+        <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime"/>
+        <result column="gender" jdbcType="BOOLEAN" property="gender"/>
+        <result column="birth" jdbcType="BIGINT" property="birth"/>
+        <result column="introduce" jdbcType="VARCHAR" property="introduce"/>
+        <result column="invite_code" jdbcType="VARCHAR" property="inviteCode"/>
+        <result column="direct_invite_id" jdbcType="BIGINT" property="directInviteId"/>
+        <result column="image_url" jdbcType="VARCHAR" property="imageUrl"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, username, `password`, fullname, mobile, email, `status`, create_by, modify_by,
+        created, last_update_time, gender, birth, introduce, invite_code, direct_invite_id,
+        image_url
+    </sql>
+
+    <select id="selectPrivilegeByUserId" resultType="java.lang.String">
+        SELECT sys_privilege.`name` AS name
+        FROM sys_privilege
+                     LEFT JOIN sys_role_privilege
+                ON sys_role_privilege.privilege_id = sys_privilege.id
+                     LEFT JOIN sys_user_role
+                ON sys_user_role.role_id = sys_role_privilege.role_id
+        WHERE sys_user_role.user_id = #{userId}
+    </select>
+</mapper>

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.7.8</version>
+<!--        <version>2.7.8</version>-->
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+<!--    <parent>-->
+<!--        <artifactId>api-matser</artifactId>-->
+<!--        <groupId>com.zhai</groupId>-->
+<!--        <version>1.0</version>-->
+<!--    </parent>-->
+
+    <modules>
+        <module>native-cloud-service</module>
+    </modules>
+    <groupId>com.fsc</groupId>
+    <artifactId>api-native-cloud</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0</version>
+
+    <!--  版本配置  -->
+    <properties>
+        <java.version>1.8</java.version>
+        <swagger2.version>2.9.2</swagger2.version>
+        <swagger-annotations.version>1.5.22</swagger-annotations.version>
+        <hutool.version>5.8.12</hutool.version>
+        <fabric8.version>6.4.1</fabric8.version>
+<!--        <spring-cloud.version>Greenwich.SR5</spring-cloud.version>-->
+        <mybatis-plus-boot-stater.version>3.3.2</mybatis-plus-boot-stater.version>
+        <mysql-connector-java.version>8.0.19</mysql-connector-java.version>
+        <commons-io.version>2.11.0</commons-io.version>
+        <spring-boot-redis.version>2.6.7</spring-boot-redis.version>
+        <jjwt.version>0.9.0</jjwt.version>
+        <jedis.version>3.5.2</jedis.version>
+        <fastjson.version>1.2.79</fastjson.version>
+    </properties>
+
+    <!--    dependency-->
+    <dependencies>
+
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!--hutool工具类-->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>${hutool.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <!--mysql-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql-connector-java.version}</version>
+        </dependency>
+        <!--apace commons工具-->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons-io.version}</version>
+        </dependency>
+        <!--redis应用依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+            <version>${spring-boot-redis.version}</version>
+        </dependency>
+
+        <!--        json-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>${jedis.version}</version>
+        </dependency>
+        <!--   >mybatis-plus     -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>${mybatis-plus-boot-stater.version}</version>
+        </dependency>
+        <!--   jwt     -->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>${jjwt.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-annotation</artifactId>
+            <version>${mybatis-plus-boot-stater.version}</version>
+        </dependency>
+
+
+
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+<!--            <exclusions>-->
+<!--                <exclusion>-->
+<!--                    <artifactId>junit-jupiter</artifactId>-->
+<!--                    <groupId>org.junit.jupiter</groupId>-->
+<!--                </exclusion>-->
+<!--                <exclusion>-->
+<!--                    <groupId>org.junit.jupiter</groupId>-->
+<!--                    <artifactId>junit-jupiter-params</artifactId>-->
+<!--                </exclusion>-->
+<!--                <exclusion>-->
+<!--                    <groupId>org.junit.jupiter</groupId>-->
+<!--                    <artifactId>junit-jupiter-api</artifactId>-->
+<!--                </exclusion>-->
+<!--            </exclusions>-->
+
+        </dependency>
+    </dependencies>
+
+    <!--  dependencyManagement  -->
+    <dependencyManagement>
+        <dependencies>
+
+            <!--io.fabric8 -->
+            <dependency>
+                <groupId>io.fabric8</groupId>
+                    <artifactId>kubernetes-client</artifactId>
+                <version>${fabric8.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>org.springframework.cloud</groupId>-->
+<!--                <artifactId>spring-cloud-dependencies</artifactId>-->
+<!--                <version>${spring-cloud.version}</version>-->
+<!--                <type>pom</type>-->
+<!--                <scope>import</scope>-->
+<!--            </dependency>-->
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+
+</project>
